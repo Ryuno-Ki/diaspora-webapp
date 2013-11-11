@@ -9,7 +9,7 @@
     <link href="design/icon.png" rel="apple-touch-icon" />
   </head>
   <body>
-    <header>
+    <header role="banner">
       <a id="installLink" href="https://marketplace.firefox.com/app/diaspora/">
         <img src="design/icon_market.png" alt="Install the app" title="Install the app" />
       </a>
@@ -17,10 +17,9 @@
         <a href="https://diasporafoundation.org">diaspora*</a>
       </h1>
     </header>
-    <ul>
-      <li><label for="podurl">Please enter your diaspora* handle</label></li>
-      <li><input id="podurl" name="podurl" type="text" placeholder="username@yourpod.tld" /></li>
-      <li id="error" class="hidden"></li>
+    <ul role="form">
+      <li><label for="podurl" id="podurl_label">Please enter your diaspora* handle</label></li>
+      <li><input id="podurl" name="podurl" type="email" pattern="[A-Za-z0-9_]+@[a-zA-Z0-9\-]+\.[A-Za-z0-9\-]{2,}" aria-labelledby="podurl_label" aria-required="true" placeholder="username@yourpod.tld" autofocus required /></li>
       <li><button id="submitButton" type="submit">Go to my pod!</button></li>
     </ul>
     <footer>
