@@ -1,15 +1,15 @@
 <!doctype HTML>
-<html>
+<html lang="en">
   <head>
     <title>Application webapps</title>
     <meta charset="utf-8" />
     <meta content="width=device-width" name="viewport" />
     <link rel="stylesheet" media="screen" type="text/css" title="design" href="design/style.css" />
-		<link href="design/icon.png" rel="shortcut icon">
-		<link href="design/icon.png" rel="apple-touch-icon">
+    <link href="design/icon.png" rel="shortcut icon" />
+    <link href="design/icon.png" rel="apple-touch-icon" />
   </head>
   <body>
-    <header>
+    <header role="banner">
       <a id="installLink" href="https://marketplace.firefox.com/app/diaspora/">
         <img src="design/icon_market.png" alt="Install the app" title="Install the app" />
       </a>
@@ -17,12 +17,13 @@
         <a href="https://diasporafoundation.org">diaspora*</a>
       </h1>
     </header>
-    <ul id="previousHandles"></ul>
+    <ul id="previousHandles">
+	    <span id="storedHandles">These handles have been saved, yet.</span><!-- Something like that, if there are items yet. -->
+    </ul>
     <form>
       <ul id="newHandle">
         <li><label for="podurl">Please enter your diaspora* handle</label></li>
-        <li><input id="podurl" name="podurl" type="text" placeholder="username@yourpod.tld" /></li>
-        <li id="error" class="hidden"></li>
+        <li><input id="podurl" name="podurl" type="email" pattern="[A-Za-z0-9_]+@[a-zA-Z0-9\-]+\.[A-Za-z0-9\-]{2,}" aria-labelledby="podurl_label" aria-required="true" placeholder="username@yourpod.tld" autofocus required /></li>
         <li><button id="submitButton" type="submit">Go to my pod!</button></li>
       </ul>
     </form>

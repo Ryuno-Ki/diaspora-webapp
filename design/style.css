@@ -1,5 +1,13 @@
+/* Preparing for ARIA-compliant styling */
+header, footer, nav,
+article, aside, section,
+figure, figcaption {
+  display: block;
+}
+
 body {
   background: url("hatched-light.jpg") #ecebe7;
+  color: black;
   margin: auto;
   font-size: 1.1rem;
   font-family: "Helvetica Neue", Helvetica, sans-serif;
@@ -75,6 +83,7 @@ button {
   background-color: #F5F5F5;
   background-image: linear-gradient(to bottom, #FFFFFF, #E6E6E6);
   background-repeat: repeat-x;
+  color: black;
   border-radius: 0.1rem;
   border-style: solid;
   border-width: 1px;
@@ -88,9 +97,8 @@ footer {
 }
 
 footer a, footer a:visited {
+  // fails the color contrast recommendations
   color: #999999;
 }
 
-#error { color: red; }
-
-.hidden { display: none; }
+#error { color: #ff0000; }
