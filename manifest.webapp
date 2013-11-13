@@ -21,9 +21,10 @@
         },
         "it": {
             "description": "Applicazione OpenWeb per il social network diaspora*"
-        }
+        },
 	"de": {
 	    "description": "Offene Web Anwendung für das Soziale Netzwerk diaspora*"
+	}
     },
     "default_locale": "en"
 }
