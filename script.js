@@ -7,7 +7,14 @@ function init() {
     var list = document.getElementById("previousHandles");
     
     for (var i = 0; i < window.localStorage.length; i++) {
-      var handle = window.localStorage.key(i);
+      var handleCandidate = window.localStorage.key(i);
+      /* It may happen, that localStorage is polluted by other data.*/
+      if (validateHandle(handleCandidate)) {
+        var handle = handleCandidate;
+      } else {
+	console.log('Discarding ' + handleCandidate + ' from suggested handles.');
+        continue;
+      }
       var li = document.createElement('li');
       var linkToPod = document.createElement('a');
       // Icon was not shipped in my branch. Hence replacing it with span for now
@@ -33,44 +40,19 @@ function init() {
   }
 }
 
-function removeOldAlert() {
-  var oldAlert = document.getElementById('alert');
-  if (oldAlert != null) {
-    /* Since DOM does not provide a way to delete sth, workaround this way.
-     * It isn't removed in Memory, though (hence assigning null) */
-    oldAlert.parentNode.removeChild(oldAlert);
-    oldAlert = null;
-  }
-}
-
-function alertUser(handle) {
-  removeOldAlert();
-  var newAlert = document.createElement('li');
-  var msg = document.createTextNode('"' + handle + '" is not a correct handle!');
-  var podUrl = document.getElementById('podurl');
-
-  /* Everytime, an element with role="alert" is inserted into the DOM the
-   * browser fires an alert-event, which can be listened on by assistive
-   * technology. Hence removing maybe existing one first and insert a new one
-   * */
-  newAlert.setAttribute('role', 'alert');
-  newAlert.setAttribute('id', 'error');
-  newAlert.appendChild(msg);
-  podUrl.parentNode.appendChild(newAlert);
-}
-
 function submit(e) {
   e.preventDefault();
   var handleElement = document.getElementById('podurl');
   var handle = handleElement.value;
-  var handleRegExp = new RegExp(/[A-Za-z0-9_]+@(([a-zA-Z0-9\-]*)\.)+([A-Za-z0-9\-]{2,})/);
-  var validatedHandle = handleRegExp.test(handle);
+  var validatedHandle = validateHandle(handle);
 
+  /* I need a validatedHandle var later on in the a11y branch */
   if (!validatedHandle) {
-    alertUser(pod);
-    handle.setAttribute('aria-invalid', validatedHandle);
+    /* This condition block will be replaced later */
+    var error_message = document.getElementById('error');
+    error_message.className = '';
+    error_message.textContent = '"' + handle + '" is not a correct handle!';
   } else {
-    handleElement.setAttribute('aria-invalid', validatedHandle);
     /* Store the handle in the localStorage
      * Firefox claims, that this is insecure */
     window.localStorage.setItem(handle, "");
@@ -84,6 +66,11 @@ function getUrl(handle) {
      * should implicit this here */
     var splitted = handle.split('@');
     return 'https://' + splitted[1] + '/users/sign_in?user[username]=' + splitted[0];
+}
+
+function validateHandle(handle) {
+  var handleRegExp = new RegExp(/[A-Za-z0-9_]+@(([a-zA-Z0-9\-]*)\.)+([A-Za-z0-9\-]{2,})/);
+  return handleRegExp.test(handle);
 }
 
 function deleteHandle(event) {
