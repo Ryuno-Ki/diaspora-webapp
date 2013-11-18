@@ -6,7 +6,7 @@ function init() {
   if (window.localStorage.length > 0) {
     var div = document.getElementById('previousHandles');
     
-    // Modify indications
+    /* Modify indications */
     var existingHandlesLabel = document.createElement('p');
     existingHandlesLabel.setAttribute('id', 'existing-handles-label');
     existingHandlesLabel.appendChild(document.createTextNode('Please select one of your handles:'));
@@ -14,7 +14,7 @@ function init() {
     
     document.getElementById('podurl-label').textContent = 'Or enter a new one below:';
     
-    // Add previous handles to a list
+    /* Add previous handles to a list */
     var ul = document.createElement('ul');
     for (var i = 0; i < window.localStorage.length; i++) {
       var handleCandidate = window.localStorage.key(i);
@@ -34,7 +34,7 @@ function init() {
       linkToPod.setAttribute('title', 'Go to my pod!');
       linkToPod.appendChild(document.createTextNode(handle));
       
-      //removeIcon.setAttribute('src', './design/monotone_close_exit_delete.png');
+      removeIcon.setAttribute('src', './design/monotone_close_exit_delete.png');
       removeIcon.setAttribute('alt', removeString);
       removeIcon.setAttribute('title', removeString);
       removeIcon.setAttribute('class', 'deleteHandle');
