@@ -3,6 +3,18 @@ window.addEventListener("load", init, false);
 function init() {
   document.getElementById('login-form').addEventListener('submit', submit, false);
   
+  /* Firefox throws errors randomly:
+   * SecurityError: The operation is insecure.
+   * if (window.localStorage.length > 0) {…}
+   *
+   * As far as I have found out, it may depends on DOM status:
+   * see http://stackoverflow.com/q/13852209
+   * and http://stackoverflow.com/q/3698200
+   * Maybe a good point to use some additional JavaScript libraries to abstract
+   * these issues away?
+   * Or I ran into this problem:
+   * http://meyerweb.com/eric/thoughts/2012/04/25/firefox-failing-localstorage/
+   */
   if (window.localStorage.length > 0) {
     var div = document.getElementById('previousHandles');
     
@@ -28,7 +40,7 @@ function init() {
       var li = document.createElement('li');
       var linkToPod = document.createElement('a');
       var removeIcon = document.createElement('img');
-      var removeString = 'Remove this handle';
+      var removeString = 'Remove this handle!';
       
       linkToPod.setAttribute('href', getUrl(handle));
       linkToPod.setAttribute('title', 'Go to my pod!');
@@ -98,3 +110,4 @@ function deleteHandle(event) {
     existingHandlesLabel = null;  
     document.getElementById('podurl-label').textContent = 'Please enter your diaspora* handle:';
   }
+}
