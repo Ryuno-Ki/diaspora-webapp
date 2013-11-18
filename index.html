@@ -1,7 +1,7 @@
 <!doctype HTML>
 <html lang="en">
   <head>
-    <title>Application webapps</title>
+    <title>diaspora* OpenWebApps</title>
     <meta charset="utf-8" />
     <meta content="width=device-width" name="viewport" />
     <link rel="stylesheet" media="screen" type="text/css" title="design" href="design/style.css" />
@@ -17,20 +17,22 @@
         <a href="https://diasporafoundation.org">diaspora*</a>
       </h1>
     </header>
-    <!-- Remove this noscript-element when a server-side form-action is implemented. -->
-    <noscript>Please activate JavaScript to enjoy using this app.</noscript>
-    <ul id="previousHandles">
-	    <span id="storedHandles">These handles have been saved, yet.</span><!-- Something like that, if there are items yet. -->
-    </ul>
-    <!-- This file should be replaced with a server-side one. For example written in node.js, PHP, Perl or Python. -->
-    <form action="script.js" method="post" accept-charset="utf-8">
-      <ul id="newHandle">
-        <li><label for="podurl">Please enter your diaspora* handle</label></li>
-        <li><input id="podurl" name="podurl" type="text" placeholder="username@yourpod.tld" autofocus required /></li>
-	<li class="hidden" id="error"></li><!-- Remove this line, when a11y was merged! -->
-        <li><button id="submitButton" type="submit">Go to my pod!</button></li>
+    <section id="content">
+      <!-- Remove this noscript-element when a server-side form-action is implemented. -->
+      <noscript>Please activate JavaScript to enjoy using this app.</noscript>
+      <ul id="previousHandles">
+        <span id="storedHandles">These handles have been saved, yet.</span><!-- Something like that, if there are items yet. -->
       </ul>
-    </form>
+      <!-- This file should be replaced with a server-side one. For example written in node.js, PHP, Perl or Python. -->
+      <form id="login-form" action="script.js" method="post" accept-charset="utf-8">
+        <ul id="newHandle">
+          <li><label for="podurl">Please enter your diaspora* handle</label></li>
+          <li><input id="podurl" name="podurl" type="email" pattern="(/[A-Za-z0-9_]+@(([a-zA-Z0-9\-]*)\.)+([A-Za-z0-9\-]{2,})/)" placeholder="username@yourpod.tld" autofocus required /></li>
+	  <li class="hidden" id="error"></li><!-- Remove this line, when a11y was merged! -->
+          <li><button id="submitButton" type="submit">Go to my pod!</button></li>
+        </ul>
+      </form>
+    </section>
     <footer>
       <p><a href="https://wiki.diasporafoundation.org/Choosing_a_pod">I have no pod at the moment!</a></p>
     </footer>

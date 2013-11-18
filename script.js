@@ -1,11 +1,21 @@
 window.addEventListener("load", init, false);
 
 function init() {
-  document.getElementById('submitButton').addEventListener('click', submit, false);
+  document.getElementById('login-form').addEventListener('submit', submit, false);
   
   if (window.localStorage.length > 0) {
-    var list = document.getElementById("previousHandles");
+    var div = document.getElementById('previousHandles');
     
+    // Modify indications
+    var existingHandlesLabel = document.createElement('p');
+    existingHandlesLabel.setAttribute('id', 'existing-handles-label');
+    existingHandlesLabel.appendChild(document.createTextNode('Please select one of your handles:'));
+    div.appendChild(existingHandlesLabel);
+    
+    document.getElementById('podurl-label').textContent = 'Or enter a new one below:';
+    
+    // Add previous handles to a list
+    var ul = document.createElement('ul');
     for (var i = 0; i < window.localStorage.length; i++) {
       var handleCandidate = window.localStorage.key(i);
       /* It may happen, that localStorage is polluted by other data.*/
@@ -17,10 +27,8 @@ function init() {
       }
       var li = document.createElement('li');
       var linkToPod = document.createElement('a');
-      // Icon was not shipped in my branch. Hence replacing it with span for now
-      //var removeIcon = document.createElement('img');
-      var removeIcon = document.createElement('span');
-      var removeString = "Remove this handle";
+      var removeIcon = document.createElement('img');
+      var removeString = 'Remove this handle';
       
       linkToPod.setAttribute('href', getUrl(handle));
       linkToPod.setAttribute('title', 'Go to my pod!');
@@ -35,8 +43,9 @@ function init() {
       
       li.appendChild(removeIcon);
       li.appendChild(linkToPod);
-      list.appendChild(li);
+      ul.appendChild(li);
     }
+    div.appendChild(ul);
   }
 }
 
@@ -81,5 +90,11 @@ function deleteHandle(event) {
   window.localStorage.removeItem(img.dataset.handle);
   /* Remove the element from the list */
   listElem.parentNode.removeChild(listElem);
-  listElem = null;
-}
+  listElem = null;  
+  
+  if (window.localStorage.length == 0) {
+    var existingHandlesLabel = document.getElementById('existing-handles-label');
+    existingHandlesLabel.parentNode.removeChild(existingHandlesLabel);
+    existingHandlesLabel = null;  
+    document.getElementById('podurl-label').textContent = 'Please enter your diaspora* handle:';
+  }

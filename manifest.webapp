@@ -1,5 +1,5 @@
 {
-    "version": "0.2",
+    "version": "0.3",
     "name": "diaspora*",
     "description": "OpenWeb Application for the diaspora* social network",
     "launch_path": "/diaspora-webapp/index.html",
@@ -26,5 +26,6 @@
 	    "description": "Offene Web Anwendung für das Soziale Netzwerk diaspora*"
 	}
     },
+    "chrome": { "navigation": true },
     "default_locale": "en"
 }

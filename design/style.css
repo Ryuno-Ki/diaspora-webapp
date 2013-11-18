@@ -31,6 +31,10 @@ header h1 a:visited {
   text-decoration: none;
 }
 
+#content {
+  margin: 0px 5%;
+}
+
 #installLink {
   float: right;
   margin-top: 8px;
@@ -43,21 +47,21 @@ ul {
 }
 
 li {
-  margin: 12px 5%;
+  margin-bottom: 12px;
 }
 
-#newHandle li > *,
-#previousHandles a {
-  padding: 0.9rem;
+#newHandle li > * {
+  height: 3.8rem;
   width: 100%;
   font-weight: 500;
   vertical-align: middle;
 }
 
-input, button, #previousHandles a {
-  display: block;
+input, button {
+  padding: 0px;
   padding-left: 0.5rem;
   font-size: 1.4rem;
+  -moz-box-sizing: border-box;
 }
 
 #previousHandles > li,
@@ -87,20 +91,28 @@ input[type='email']:hover{
 
 #previousHandles li {
   background-color: white;
-  border: 1px solid #DDDDDD;
+  height: 3.0rem;
+  border: solid green 1px;
 }
 
-#previousHandles a:focus,
-#previousHandles a:hover {
+#previousHandles a {
   display: block;
+  padding: 0px;
+  padding-left: 0.5rem;
+  margin-right: 0.5rem;
   color: black;
   text-decoration: none;
+  font-size: 1.2rem;
+  line-height: 2.5;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 }
 
 .deleteHandle {
   display: block;
   float: right;
-  padding: 1rem;
+  padding: 0.9rem 0.5rem;
   cursor: pointer;
   z-index: 10;
 }
